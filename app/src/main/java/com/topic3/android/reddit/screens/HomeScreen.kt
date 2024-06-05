@@ -114,11 +114,29 @@ fun HomeScreen(viewModel: MainViewModel) {
 }
 
 
-    @Composable
-    private fun TrendingTopics(
+private fun mapHomeScreenItems(
+    posts: List<PostModel>
+): List<HomeScreenItem> {
+    val homeScreenItems = mutableListOf<HomeScreenItem>()
+
+    homeScreenItems.add(
+        HomeScreenItem(HomeScreenItemType.TRENDING)
+    )
+
+    posts.forEach { post ->
+        homeScreenItems.add(
+            HomeScreenItem(HomeScreenItemType.POST, post)
+        )
+    }
+    return homeScreenItems
+}
+
+
+@Composable
+private fun TrendingTopics(
     trendingTopics: List<TrendingTopicModel>,
     modifier: Modifier = Modifier
-    ){
+){
     Card (
     shape = MaterialTheme.shapes.large,
     modifier = modifier
